@@ -11,6 +11,20 @@ struct ContentView: View {
     var body: some View {
         Text("Hello, world!")
             .padding()
+            .onAppear{
+                fetchRepoList()
+            }
+    }
+
+    func fetchRepoList() {
+        Network.shared.apollo.fetch(query: RepoListQuery(first: 100)) { result in
+            switch result {
+            case .success(let graphQLResult):
+                print("Success! Result: \(graphQLResult)")
+            case .failure(let error):
+                print("Failure! Error: \(error)")
+            }
+        }
     }
 }
 
