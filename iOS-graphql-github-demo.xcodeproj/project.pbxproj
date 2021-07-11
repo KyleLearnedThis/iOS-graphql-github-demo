@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,12 @@
 		DEB12D17269AF2FF00421353 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEB12D16269AF2FF00421353 /* Preview Assets.xcassets */; };
 		DEB12D22269AF2FF00421353 /* iOS_graphql_github_demoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB12D21269AF2FF00421353 /* iOS_graphql_github_demoTests.swift */; };
 		DEB12D2D269AF2FF00421353 /* iOS_graphql_github_demoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB12D2C269AF2FF00421353 /* iOS_graphql_github_demoUITests.swift */; };
+		DEB12D3C269AF3E300421353 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = DEB12D3B269AF3E300421353 /* Apollo */; };
+		DEB12D3E269AF3E300421353 /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = DEB12D3D269AF3E300421353 /* ApolloWebSocket */; };
+		DEB12D40269AF3E300421353 /* ApolloAPI in Frameworks */ = {isa = PBXBuildFile; productRef = DEB12D3F269AF3E300421353 /* ApolloAPI */; };
+		DEB12D45269B00CE00421353 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB12D44269B00CE00421353 /* API.swift */; };
+		DEB12D46269B00CE00421353 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB12D44269B00CE00421353 /* API.swift */; };
+		DEB12D47269B00CE00421353 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB12D44269B00CE00421353 /* API.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +51,10 @@
 		DEB12D28269AF2FF00421353 /* iOS-graphql-github-demoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS-graphql-github-demoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEB12D2C269AF2FF00421353 /* iOS_graphql_github_demoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_graphql_github_demoUITests.swift; sourceTree = "<group>"; };
 		DEB12D2E269AF2FF00421353 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DEB12D42269AFBFF00421353 /* schema.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
+		DEB12D43269AFD3500421353 /* RepoList.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = RepoList.graphql; sourceTree = "<group>"; };
+		DEB12D44269B00CE00421353 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		DEB12D48269B986400421353 /* RepoPageList.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = RepoPageList.graphql; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +62,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEB12D40269AF3E300421353 /* ApolloAPI in Frameworks */,
+				DEB12D3C269AF3E300421353 /* Apollo in Frameworks */,
+				DEB12D3E269AF3E300421353 /* ApolloWebSocket in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,11 +108,15 @@
 		DEB12D0E269AF2FC00421353 /* iOS-graphql-github-demo */ = {
 			isa = PBXGroup;
 			children = (
+				DEB12D42269AFBFF00421353 /* schema.json */,
+				DEB12D44269B00CE00421353 /* API.swift */,
 				DEB12D0F269AF2FC00421353 /* iOS_graphql_github_demoApp.swift */,
 				DEB12D11269AF2FC00421353 /* ContentView.swift */,
 				DEB12D13269AF2FF00421353 /* Assets.xcassets */,
 				DEB12D18269AF2FF00421353 /* Info.plist */,
 				DEB12D15269AF2FF00421353 /* Preview Content */,
+				DEB12D43269AFD3500421353 /* RepoList.graphql */,
+				DEB12D48269B986400421353 /* RepoPageList.graphql */,
 			);
 			path = "iOS-graphql-github-demo";
 			sourceTree = "<group>";
@@ -146,6 +163,11 @@
 			dependencies = (
 			);
 			name = "iOS-graphql-github-demo";
+			packageProductDependencies = (
+				DEB12D3B269AF3E300421353 /* Apollo */,
+				DEB12D3D269AF3E300421353 /* ApolloWebSocket */,
+				DEB12D3F269AF3E300421353 /* ApolloAPI */,
+			);
 			productName = "iOS-graphql-github-demo";
 			productReference = DEB12D0C269AF2FC00421353 /* iOS-graphql-github-demo.app */;
 			productType = "com.apple.product-type.application";
@@ -217,6 +239,9 @@
 				Base,
 			);
 			mainGroup = DEB12D03269AF2FC00421353;
+			packageReferences = (
+				DEB12D3A269AF3E300421353 /* XCRemoteSwiftPackageReference "apollo-ios" */,
+			);
 			productRefGroup = DEB12D0D269AF2FC00421353 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -260,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEB12D12269AF2FC00421353 /* ContentView.swift in Sources */,
+				DEB12D45269B00CE00421353 /* API.swift in Sources */,
 				DEB12D10269AF2FC00421353 /* iOS_graphql_github_demoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,6 +294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEB12D46269B00CE00421353 /* API.swift in Sources */,
 				DEB12D22269AF2FF00421353 /* iOS_graphql_github_demoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,6 +303,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEB12D47269B00CE00421353 /* API.swift in Sources */,
 				DEB12D2D269AF2FF00421353 /* iOS_graphql_github_demoUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -580,6 +608,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DEB12D3A269AF3E300421353 /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apollographql/apollo-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.45.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DEB12D3B269AF3E300421353 /* Apollo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DEB12D3A269AF3E300421353 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = Apollo;
+		};
+		DEB12D3D269AF3E300421353 /* ApolloWebSocket */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DEB12D3A269AF3E300421353 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = ApolloWebSocket;
+		};
+		DEB12D3F269AF3E300421353 /* ApolloAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DEB12D3A269AF3E300421353 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = ApolloAPI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DEB12D04269AF2FC00421353 /* Project object */;
 }
