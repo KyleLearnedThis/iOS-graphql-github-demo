@@ -1,0 +1,18 @@
+query RepoPageList($first: Int, $after:String) {
+  search(query: "repository:graphql", type: REPOSITORY, first: $first, after:$after) {
+    repositoryCount
+    edges {
+      cursor
+      node {
+        ... on Repository {
+          name
+          owner {
+            login
+            avatarUrl
+          }
+          stargazerCount
+        }
+      }
+    }
+  }
+}
