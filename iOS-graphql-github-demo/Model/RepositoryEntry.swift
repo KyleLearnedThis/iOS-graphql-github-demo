@@ -3,7 +3,7 @@
 //  iOS-graphql-github-demo
 //
 //  Created by KyleLearnedThis on 7/12/21.
-//
+//  Model for this app, not that cursor is not used visually but for pagination.
 
 import Foundation
 

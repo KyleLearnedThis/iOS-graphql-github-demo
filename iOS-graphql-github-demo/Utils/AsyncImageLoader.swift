@@ -3,7 +3,7 @@
 //  iOS-graphql-github-demo
 //
 //  Created by KyleLearnedThis on 7/12/21.
-//
+//  Fetch image from an URL.  It has a loading animation before image is fully loaded
 
 import SwiftUI
 import Combine

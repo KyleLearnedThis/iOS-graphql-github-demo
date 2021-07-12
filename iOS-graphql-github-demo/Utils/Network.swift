@@ -3,7 +3,7 @@
 //  iOS-graphql-github-demo
 //
 //  Created by KyleLearnedThis on 7/11/21.
-//
+//  Apollo GraphQL network setup
 
 import Foundation
 import Apollo
@@ -26,8 +26,7 @@ class Network {
 
         let url = URL(string: "https://api.github.com/graphql")!
 
-        let requestChainTransport = RequestChainNetworkTransport(interceptorProvider: provider,
-                                                                 endpointURL: url)
+        let requestChainTransport = RequestChainNetworkTransport(interceptorProvider: provider, endpointURL: url)
 
         return ApolloClient(networkTransport: requestChainTransport,
                             store: store1)

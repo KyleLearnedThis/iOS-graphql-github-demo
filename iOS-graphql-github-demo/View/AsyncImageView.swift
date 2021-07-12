@@ -3,7 +3,7 @@
 //  iOS-graphql-github-demo
 //
 //  Created by KyleLearnedThis on 7/12/21.
-//
+//  Loads image remotely, peek cache for image in cache.  If it's not in the cache, create it and store it in cache for future use.
 
 import SwiftUI
 
