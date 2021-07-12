@@ -26,6 +26,12 @@
 		DEB12D53269C2CB700421353 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB12D52269C2CB700421353 /* MainView.swift */; };
 		DEB12D55269C320D00421353 /* RepositoryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB12D54269C320D00421353 /* RepositoryEntry.swift */; };
 		DEB12D59269C38B100421353 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB12D4A269B9D8800421353 /* Network.swift */; };
+		DEB12D5B269C3BB500421353 /* RepostitoryEntryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB12D5A269C3BB500421353 /* RepostitoryEntryItemView.swift */; };
+		DEB12D5D269C3DBE00421353 /* AsyncImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB12D5C269C3DBE00421353 /* AsyncImageLoader.swift */; };
+		DEB12D5F269C3DE900421353 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB12D5E269C3DE900421353 /* ImageCache.swift */; };
+		DEB12D61269C3E2300421353 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB12D60269C3E2300421353 /* AsyncImageView.swift */; };
+		DEB12D63269C3E7F00421353 /* Image+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB12D62269C3E7F00421353 /* Image+Ext.swift */; };
+		DEB12D67269C3F2D00421353 /* RemoteImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB12D66269C3F2D00421353 /* RemoteImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +73,12 @@
 		DEB12D50269C245600421353 /* GithubViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubViewModel.swift; sourceTree = "<group>"; };
 		DEB12D52269C2CB700421353 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		DEB12D54269C320D00421353 /* RepositoryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryEntry.swift; sourceTree = "<group>"; };
+		DEB12D5A269C3BB500421353 /* RepostitoryEntryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepostitoryEntryItemView.swift; sourceTree = "<group>"; };
+		DEB12D5C269C3DBE00421353 /* AsyncImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageLoader.swift; sourceTree = "<group>"; };
+		DEB12D5E269C3DE900421353 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		DEB12D60269C3E2300421353 /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
+		DEB12D62269C3E7F00421353 /* Image+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Ext.swift"; sourceTree = "<group>"; };
+		DEB12D66269C3F2D00421353 /* RemoteImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,8 +175,11 @@
 		DEB12D56269C386F00421353 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DEB12D60269C3E2300421353 /* AsyncImageView.swift */,
 				DEB12D11269AF2FC00421353 /* ContentView.swift */,
 				DEB12D52269C2CB700421353 /* MainView.swift */,
+				DEB12D5A269C3BB500421353 /* RepostitoryEntryItemView.swift */,
+				DEB12D66269C3F2D00421353 /* RemoteImageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -182,8 +197,11 @@
 			isa = PBXGroup;
 			children = (
 				DEB12D44269B00CE00421353 /* API.swift */,
-				DEB12D4A269B9D8800421353 /* Network.swift */,
+				DEB12D5C269C3DBE00421353 /* AsyncImageLoader.swift */,
 				DEB12D4D269BB23600421353 /* Configurations.swift */,
+				DEB12D5E269C3DE900421353 /* ImageCache.swift */,
+				DEB12D62269C3E7F00421353 /* Image+Ext.swift */,
+				DEB12D4A269B9D8800421353 /* Network.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -325,14 +343,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEB12D5F269C3DE900421353 /* ImageCache.swift in Sources */,
 				DEB12D12269AF2FC00421353 /* ContentView.swift in Sources */,
 				DEB12D53269C2CB700421353 /* MainView.swift in Sources */,
 				DEB12D55269C320D00421353 /* RepositoryEntry.swift in Sources */,
+				DEB12D5D269C3DBE00421353 /* AsyncImageLoader.swift in Sources */,
+				DEB12D63269C3E7F00421353 /* Image+Ext.swift in Sources */,
+				DEB12D67269C3F2D00421353 /* RemoteImageView.swift in Sources */,
 				DEB12D4E269BB23600421353 /* Configurations.swift in Sources */,
 				DEB12D45269B00CE00421353 /* API.swift in Sources */,
 				DEB12D51269C245600421353 /* GithubViewModel.swift in Sources */,
 				DEB12D4B269B9D8800421353 /* Network.swift in Sources */,
+				DEB12D5B269C3BB500421353 /* RepostitoryEntryItemView.swift in Sources */,
 				DEB12D10269AF2FC00421353 /* iOS_graphql_github_demoApp.swift in Sources */,
+				DEB12D61269C3E2300421353 /* AsyncImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

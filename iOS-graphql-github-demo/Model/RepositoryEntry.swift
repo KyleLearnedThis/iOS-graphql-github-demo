@@ -18,11 +18,14 @@ class RepositoryEntry: Hashable {
 
     var id = UUID()
     var name: String
+    var owner: String
     var avatarUrl: String
     var cursor: String
     var stargazerCount: Int
-    init(name: String, avatarUrl: String, cursor: String, stargazerCount: Int) {
+
+    init(name: String, owner: String, avatarUrl: String, cursor: String, stargazerCount: Int) {
         self.name = name
+        self.owner = owner
         self.avatarUrl = avatarUrl
         self.cursor = cursor
         self.stargazerCount = stargazerCount

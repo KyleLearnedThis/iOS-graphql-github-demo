@@ -17,11 +17,13 @@ class GitHubViewModel: ObservableObject {
                 let edges = graphQLResult.data?.search.edges as! [RepoListQuery.Data.Search.Edge]
 
                 self.entries = edges.map { it in
-                    let name = it.node?.asRepository?.name ?? "Anon"
-                    let avatarUrl = it.node?.asRepository?.owner.avatarUrl ?? "https://www.error.com"
-                    let stargazerCount = it.node?.asRepository?.stargazerCount ?? -1
+                    let repo = it.node?.asRepository
+                    let name = repo?.name ?? "Anon"
+                    let owner = repo?.owner.login ?? "Nobody"
+                    let avatarUrl = repo?.owner.avatarUrl ?? "https://www.error.com"
+                    let stargazerCount = repo?.stargazerCount ?? -1
                     let cursor = it.cursor
-                    return RepositoryEntry(name: name, avatarUrl: avatarUrl, cursor: cursor, stargazerCount: stargazerCount)
+                    return RepositoryEntry(name: name, owner: owner, avatarUrl: avatarUrl, cursor: cursor, stargazerCount: stargazerCount)
                 }
 
             case .failure(let error):
