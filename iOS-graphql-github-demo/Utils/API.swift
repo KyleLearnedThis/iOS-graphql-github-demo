@@ -12,16 +12,20 @@ public final class RepoListQuery: GraphQLQuery {
       search(query: "repository:graphql", type: REPOSITORY, first: $first) {
         __typename
         repositoryCount
-        nodes {
+        edges {
           __typename
-          ... on Repository {
-            name
-            owner {
-              __typename
-              login
-              avatarUrl
+          cursor
+          node {
+            __typename
+            ... on Repository {
+              name
+              owner {
+                __typename
+                login
+                avatarUrl
+              }
+              stargazerCount
             }
-            stargazerCount
           }
         }
       }
@@ -76,7 +80,7 @@ public final class RepoListQuery: GraphQLQuery {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("repositoryCount", type: .nonNull(.scalar(Int.self))),
-          GraphQLField("nodes", type: .list(.object(Node.selections))),
+          GraphQLField("edges", type: .list(.object(Edge.selections))),
         ]
       }
 
@@ -86,8 +90,8 @@ public final class RepoListQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(repositoryCount: Int, nodes: [Node?]? = nil) {
-        self.init(unsafeResultMap: ["__typename": "SearchResultItemConnection", "repositoryCount": repositoryCount, "nodes": nodes.flatMap { (value: [Node?]) -> [ResultMap?] in value.map { (value: Node?) -> ResultMap? in value.flatMap { (value: Node) -> ResultMap in value.resultMap } } }])
+      public init(repositoryCount: Int, edges: [Edge?]? = nil) {
+        self.init(unsafeResultMap: ["__typename": "SearchResultItemConnection", "repositoryCount": repositoryCount, "edges": edges.flatMap { (value: [Edge?]) -> [ResultMap?] in value.map { (value: Edge?) -> ResultMap? in value.flatMap { (value: Edge) -> ResultMap in value.resultMap } } }])
       }
 
       public var __typename: String {
@@ -109,27 +113,24 @@ public final class RepoListQuery: GraphQLQuery {
         }
       }
 
-      /// A list of nodes.
-      public var nodes: [Node?]? {
+      /// A list of edges.
+      public var edges: [Edge?]? {
         get {
-          return (resultMap["nodes"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Node?] in value.map { (value: ResultMap?) -> Node? in value.flatMap { (value: ResultMap) -> Node in Node(unsafeResultMap: value) } } }
+          return (resultMap["edges"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [Edge?] in value.map { (value: ResultMap?) -> Edge? in value.flatMap { (value: ResultMap) -> Edge in Edge(unsafeResultMap: value) } } }
         }
         set {
-          resultMap.updateValue(newValue.flatMap { (value: [Node?]) -> [ResultMap?] in value.map { (value: Node?) -> ResultMap? in value.flatMap { (value: Node) -> ResultMap in value.resultMap } } }, forKey: "nodes")
+          resultMap.updateValue(newValue.flatMap { (value: [Edge?]) -> [ResultMap?] in value.map { (value: Edge?) -> ResultMap? in value.flatMap { (value: Edge) -> ResultMap in value.resultMap } } }, forKey: "edges")
         }
       }
 
-      public struct Node: GraphQLSelectionSet {
-        public static let possibleTypes: [String] = ["App", "Discussion", "Issue", "MarketplaceListing", "Organization", "PullRequest", "Repository", "User"]
+      public struct Edge: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["SearchResultItemEdge"]
 
         public static var selections: [GraphQLSelection] {
           return [
-            GraphQLTypeCase(
-              variants: ["Repository": AsRepository.selections],
-              default: [
-                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              ]
-            )
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("cursor", type: .nonNull(.scalar(String.self))),
+            GraphQLField("node", type: .object(Node.selections)),
           ]
         }
 
@@ -139,36 +140,8 @@ public final class RepoListQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public static func makeApp() -> Node {
-          return Node(unsafeResultMap: ["__typename": "App"])
-        }
-
-        public static func makeDiscussion() -> Node {
-          return Node(unsafeResultMap: ["__typename": "Discussion"])
-        }
-
-        public static func makeIssue() -> Node {
-          return Node(unsafeResultMap: ["__typename": "Issue"])
-        }
-
-        public static func makeMarketplaceListing() -> Node {
-          return Node(unsafeResultMap: ["__typename": "MarketplaceListing"])
-        }
-
-        public static func makeOrganization() -> Node {
-          return Node(unsafeResultMap: ["__typename": "Organization"])
-        }
-
-        public static func makePullRequest() -> Node {
-          return Node(unsafeResultMap: ["__typename": "PullRequest"])
-        }
-
-        public static func makeUser() -> Node {
-          return Node(unsafeResultMap: ["__typename": "User"])
-        }
-
-        public static func makeRepository(name: String, owner: AsRepository.Owner, stargazerCount: Int) -> Node {
-          return Node(unsafeResultMap: ["__typename": "Repository", "name": name, "owner": owner.resultMap, "stargazerCount": stargazerCount])
+        public init(cursor: String, node: Node? = nil) {
+          self.init(unsafeResultMap: ["__typename": "SearchResultItemEdge", "cursor": cursor, "node": node.flatMap { (value: Node) -> ResultMap in value.resultMap }])
         }
 
         public var __typename: String {
@@ -180,26 +153,37 @@ public final class RepoListQuery: GraphQLQuery {
           }
         }
 
-        public var asRepository: AsRepository? {
+        /// A cursor for use in pagination.
+        public var cursor: String {
           get {
-            if !AsRepository.possibleTypes.contains(__typename) { return nil }
-            return AsRepository(unsafeResultMap: resultMap)
+            return resultMap["cursor"]! as! String
           }
           set {
-            guard let newValue = newValue else { return }
-            resultMap = newValue.resultMap
+            resultMap.updateValue(newValue, forKey: "cursor")
           }
         }
 
-        public struct AsRepository: GraphQLSelectionSet {
-          public static let possibleTypes: [String] = ["Repository"]
+        /// The item at the end of the edge.
+        public var node: Node? {
+          get {
+            return (resultMap["node"] as? ResultMap).flatMap { Node(unsafeResultMap: $0) }
+          }
+          set {
+            resultMap.updateValue(newValue?.resultMap, forKey: "node")
+          }
+        }
+
+        public struct Node: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["App", "Discussion", "Issue", "MarketplaceListing", "Organization", "PullRequest", "Repository", "User"]
 
           public static var selections: [GraphQLSelection] {
             return [
-              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("name", type: .nonNull(.scalar(String.self))),
-              GraphQLField("owner", type: .nonNull(.object(Owner.selections))),
-              GraphQLField("stargazerCount", type: .nonNull(.scalar(Int.self))),
+              GraphQLTypeCase(
+                variants: ["Repository": AsRepository.selections],
+                default: [
+                  GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                ]
+              )
             ]
           }
 
@@ -209,8 +193,36 @@ public final class RepoListQuery: GraphQLQuery {
             self.resultMap = unsafeResultMap
           }
 
-          public init(name: String, owner: Owner, stargazerCount: Int) {
-            self.init(unsafeResultMap: ["__typename": "Repository", "name": name, "owner": owner.resultMap, "stargazerCount": stargazerCount])
+          public static func makeApp() -> Node {
+            return Node(unsafeResultMap: ["__typename": "App"])
+          }
+
+          public static func makeDiscussion() -> Node {
+            return Node(unsafeResultMap: ["__typename": "Discussion"])
+          }
+
+          public static func makeIssue() -> Node {
+            return Node(unsafeResultMap: ["__typename": "Issue"])
+          }
+
+          public static func makeMarketplaceListing() -> Node {
+            return Node(unsafeResultMap: ["__typename": "MarketplaceListing"])
+          }
+
+          public static func makeOrganization() -> Node {
+            return Node(unsafeResultMap: ["__typename": "Organization"])
+          }
+
+          public static func makePullRequest() -> Node {
+            return Node(unsafeResultMap: ["__typename": "PullRequest"])
+          }
+
+          public static func makeUser() -> Node {
+            return Node(unsafeResultMap: ["__typename": "User"])
+          }
+
+          public static func makeRepository(name: String, owner: AsRepository.Owner, stargazerCount: Int) -> Node {
+            return Node(unsafeResultMap: ["__typename": "Repository", "name": name, "owner": owner.resultMap, "stargazerCount": stargazerCount])
           }
 
           public var __typename: String {
@@ -222,44 +234,26 @@ public final class RepoListQuery: GraphQLQuery {
             }
           }
 
-          /// The name of the repository.
-          public var name: String {
+          public var asRepository: AsRepository? {
             get {
-              return resultMap["name"]! as! String
+              if !AsRepository.possibleTypes.contains(__typename) { return nil }
+              return AsRepository(unsafeResultMap: resultMap)
             }
             set {
-              resultMap.updateValue(newValue, forKey: "name")
+              guard let newValue = newValue else { return }
+              resultMap = newValue.resultMap
             }
           }
 
-          /// The User owner of the repository.
-          public var owner: Owner {
-            get {
-              return Owner(unsafeResultMap: resultMap["owner"]! as! ResultMap)
-            }
-            set {
-              resultMap.updateValue(newValue.resultMap, forKey: "owner")
-            }
-          }
-
-          /// Returns a count of how many stargazers there are on this object
-          public var stargazerCount: Int {
-            get {
-              return resultMap["stargazerCount"]! as! Int
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "stargazerCount")
-            }
-          }
-
-          public struct Owner: GraphQLSelectionSet {
-            public static let possibleTypes: [String] = ["Organization", "User"]
+          public struct AsRepository: GraphQLSelectionSet {
+            public static let possibleTypes: [String] = ["Repository"]
 
             public static var selections: [GraphQLSelection] {
               return [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("login", type: .nonNull(.scalar(String.self))),
-                GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
+                GraphQLField("name", type: .nonNull(.scalar(String.self))),
+                GraphQLField("owner", type: .nonNull(.object(Owner.selections))),
+                GraphQLField("stargazerCount", type: .nonNull(.scalar(Int.self))),
               ]
             }
 
@@ -269,12 +263,8 @@ public final class RepoListQuery: GraphQLQuery {
               self.resultMap = unsafeResultMap
             }
 
-            public static func makeOrganization(login: String, avatarUrl: String) -> Owner {
-              return Owner(unsafeResultMap: ["__typename": "Organization", "login": login, "avatarUrl": avatarUrl])
-            }
-
-            public static func makeUser(login: String, avatarUrl: String) -> Owner {
-              return Owner(unsafeResultMap: ["__typename": "User", "login": login, "avatarUrl": avatarUrl])
+            public init(name: String, owner: Owner, stargazerCount: Int) {
+              self.init(unsafeResultMap: ["__typename": "Repository", "name": name, "owner": owner.resultMap, "stargazerCount": stargazerCount])
             }
 
             public var __typename: String {
@@ -286,23 +276,88 @@ public final class RepoListQuery: GraphQLQuery {
               }
             }
 
-            /// The username used to login.
-            public var login: String {
+            /// The name of the repository.
+            public var name: String {
               get {
-                return resultMap["login"]! as! String
+                return resultMap["name"]! as! String
               }
               set {
-                resultMap.updateValue(newValue, forKey: "login")
+                resultMap.updateValue(newValue, forKey: "name")
               }
             }
 
-            /// A URL pointing to the owner's public avatar.
-            public var avatarUrl: String {
+            /// The User owner of the repository.
+            public var owner: Owner {
               get {
-                return resultMap["avatarUrl"]! as! String
+                return Owner(unsafeResultMap: resultMap["owner"]! as! ResultMap)
               }
               set {
-                resultMap.updateValue(newValue, forKey: "avatarUrl")
+                resultMap.updateValue(newValue.resultMap, forKey: "owner")
+              }
+            }
+
+            /// Returns a count of how many stargazers there are on this object
+            public var stargazerCount: Int {
+              get {
+                return resultMap["stargazerCount"]! as! Int
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "stargazerCount")
+              }
+            }
+
+            public struct Owner: GraphQLSelectionSet {
+              public static let possibleTypes: [String] = ["Organization", "User"]
+
+              public static var selections: [GraphQLSelection] {
+                return [
+                  GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                  GraphQLField("login", type: .nonNull(.scalar(String.self))),
+                  GraphQLField("avatarUrl", type: .nonNull(.scalar(String.self))),
+                ]
+              }
+
+              public private(set) var resultMap: ResultMap
+
+              public init(unsafeResultMap: ResultMap) {
+                self.resultMap = unsafeResultMap
+              }
+
+              public static func makeOrganization(login: String, avatarUrl: String) -> Owner {
+                return Owner(unsafeResultMap: ["__typename": "Organization", "login": login, "avatarUrl": avatarUrl])
+              }
+
+              public static func makeUser(login: String, avatarUrl: String) -> Owner {
+                return Owner(unsafeResultMap: ["__typename": "User", "login": login, "avatarUrl": avatarUrl])
+              }
+
+              public var __typename: String {
+                get {
+                  return resultMap["__typename"]! as! String
+                }
+                set {
+                  resultMap.updateValue(newValue, forKey: "__typename")
+                }
+              }
+
+              /// The username used to login.
+              public var login: String {
+                get {
+                  return resultMap["login"]! as! String
+                }
+                set {
+                  resultMap.updateValue(newValue, forKey: "login")
+                }
+              }
+
+              /// A URL pointing to the owner's public avatar.
+              public var avatarUrl: String {
+                get {
+                  return resultMap["avatarUrl"]! as! String
+                }
+                set {
+                  resultMap.updateValue(newValue, forKey: "avatarUrl")
+                }
               }
             }
           }

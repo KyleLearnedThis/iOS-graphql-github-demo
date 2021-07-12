@@ -20,9 +20,12 @@
 		DEB12D46269B00CE00421353 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB12D44269B00CE00421353 /* API.swift */; };
 		DEB12D47269B00CE00421353 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB12D44269B00CE00421353 /* API.swift */; };
 		DEB12D4B269B9D8800421353 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB12D4A269B9D8800421353 /* Network.swift */; };
-		DEB12D4C269B9D8800421353 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB12D4A269B9D8800421353 /* Network.swift */; };
 		DEB12D4E269BB23600421353 /* Configurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB12D4D269BB23600421353 /* Configurations.swift */; };
 		DEB12D4F269BB23600421353 /* Configurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB12D4D269BB23600421353 /* Configurations.swift */; };
+		DEB12D51269C245600421353 /* GithubViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB12D50269C245600421353 /* GithubViewModel.swift */; };
+		DEB12D53269C2CB700421353 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB12D52269C2CB700421353 /* MainView.swift */; };
+		DEB12D55269C320D00421353 /* RepositoryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB12D54269C320D00421353 /* RepositoryEntry.swift */; };
+		DEB12D59269C38B100421353 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB12D4A269B9D8800421353 /* Network.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +64,9 @@
 		DEB12D48269B986400421353 /* RepoPageList.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = RepoPageList.graphql; sourceTree = "<group>"; };
 		DEB12D4A269B9D8800421353 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		DEB12D4D269BB23600421353 /* Configurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurations.swift; sourceTree = "<group>"; };
+		DEB12D50269C245600421353 /* GithubViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubViewModel.swift; sourceTree = "<group>"; };
+		DEB12D52269C2CB700421353 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		DEB12D54269C320D00421353 /* RepositoryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryEntry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,17 +120,16 @@
 		DEB12D0E269AF2FC00421353 /* iOS-graphql-github-demo */ = {
 			isa = PBXGroup;
 			children = (
-				DEB12D42269AFBFF00421353 /* schema.json */,
-				DEB12D44269B00CE00421353 /* API.swift */,
 				DEB12D0F269AF2FC00421353 /* iOS_graphql_github_demoApp.swift */,
-				DEB12D11269AF2FC00421353 /* ContentView.swift */,
+				DEB12D57269C388A00421353 /* Model */,
+				DEB12D58269C389600421353 /* Utils */,
+				DEB12D56269C386F00421353 /* View */,
 				DEB12D13269AF2FF00421353 /* Assets.xcassets */,
 				DEB12D18269AF2FF00421353 /* Info.plist */,
 				DEB12D15269AF2FF00421353 /* Preview Content */,
 				DEB12D43269AFD3500421353 /* RepoList.graphql */,
 				DEB12D48269B986400421353 /* RepoPageList.graphql */,
-				DEB12D4A269B9D8800421353 /* Network.swift */,
-				DEB12D4D269BB23600421353 /* Configurations.swift */,
+				DEB12D42269AFBFF00421353 /* schema.json */,
 			);
 			path = "iOS-graphql-github-demo";
 			sourceTree = "<group>";
@@ -153,6 +158,34 @@
 				DEB12D2E269AF2FF00421353 /* Info.plist */,
 			);
 			path = "iOS-graphql-github-demoUITests";
+			sourceTree = "<group>";
+		};
+		DEB12D56269C386F00421353 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DEB12D11269AF2FC00421353 /* ContentView.swift */,
+				DEB12D52269C2CB700421353 /* MainView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DEB12D57269C388A00421353 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DEB12D50269C245600421353 /* GithubViewModel.swift */,
+				DEB12D54269C320D00421353 /* RepositoryEntry.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DEB12D58269C389600421353 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				DEB12D44269B00CE00421353 /* API.swift */,
+				DEB12D4A269B9D8800421353 /* Network.swift */,
+				DEB12D4D269BB23600421353 /* Configurations.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,8 +326,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEB12D12269AF2FC00421353 /* ContentView.swift in Sources */,
+				DEB12D53269C2CB700421353 /* MainView.swift in Sources */,
+				DEB12D55269C320D00421353 /* RepositoryEntry.swift in Sources */,
 				DEB12D4E269BB23600421353 /* Configurations.swift in Sources */,
 				DEB12D45269B00CE00421353 /* API.swift in Sources */,
+				DEB12D51269C245600421353 /* GithubViewModel.swift in Sources */,
 				DEB12D4B269B9D8800421353 /* Network.swift in Sources */,
 				DEB12D10269AF2FC00421353 /* iOS_graphql_github_demoApp.swift in Sources */,
 			);
@@ -306,8 +342,8 @@
 			files = (
 				DEB12D46269B00CE00421353 /* API.swift in Sources */,
 				DEB12D22269AF2FF00421353 /* iOS_graphql_github_demoTests.swift in Sources */,
+				DEB12D59269C38B100421353 /* Network.swift in Sources */,
 				DEB12D4F269BB23600421353 /* Configurations.swift in Sources */,
-				DEB12D4C269B9D8800421353 /* Network.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
