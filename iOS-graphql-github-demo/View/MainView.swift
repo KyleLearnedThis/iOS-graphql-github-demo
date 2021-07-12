@@ -18,6 +18,15 @@ struct MainView: View {
     var repositoryListView: some View {
         List(store.entries, id: \.self) { entry in
             RepostitoryEntryItemView(entry: entry)
+                .onAppear(perform: {
+                    let cur = entry
+                    let last = self.store.entries.last!
+                    if cur.id == last.id {
+                        print("===== get more items =====")
+                        let cursor = cur.cursor
+                        self.store.fetchMoreItems(cursor: cursor)
+                    }
+                })
         }
     }
 }
