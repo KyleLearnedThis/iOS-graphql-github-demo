@@ -3,7 +3,7 @@
 //  iOS-graphql-github-demo
 //
 //  Created by KyleLearnedThis on 7/12/21.
-//
+//  Main view model that creates and updates collections of models for view to display
 
 import Foundation
 
@@ -18,10 +18,10 @@ class GitHubViewModel: ObservableObject {
 
                 self.entries = edges.map { it in
                     let repo = it.node?.asRepository
-                    let name = repo?.name ?? "Anon"
-                    let owner = repo?.owner.login ?? "Nobody"
-                    let avatarUrl = repo?.owner.avatarUrl ?? "https://www.error.com"
-                    let stargazerCount = repo?.stargazerCount ?? -1
+                    let name = repo?.name ?? "Missing"
+                    let owner = repo?.owner.login ?? "Github-Mark"
+                    let avatarUrl = repo?.owner.avatarUrl ?? "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+                    let stargazerCount = repo?.stargazerCount ?? 0
                     let cursor = it.cursor
                     return RepositoryEntry(name: name, owner: owner, avatarUrl: avatarUrl, cursor: cursor, stargazerCount: stargazerCount)
                 }
@@ -40,10 +40,10 @@ class GitHubViewModel: ObservableObject {
 
                 let temp = edges.map { it -> RepositoryEntry in
                     let repo = it.node?.asRepository
-                    let name = repo?.name ?? "Anon"
-                    let owner = repo?.owner.login ?? "Nobody"
-                    let avatarUrl = repo?.owner.avatarUrl ?? "https://www.error.com"
-                    let stargazerCount = repo?.stargazerCount ?? -1
+                    let name = repo?.name ?? "Missing"
+                    let owner = repo?.owner.login ?? "Github-Mark"
+                    let avatarUrl = repo?.owner.avatarUrl ?? "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+                    let stargazerCount = repo?.stargazerCount ?? 0
                     let cursor = it.cursor
                     return RepositoryEntry(name: name, owner: owner, avatarUrl: avatarUrl, cursor: cursor, stargazerCount: stargazerCount)
                 }

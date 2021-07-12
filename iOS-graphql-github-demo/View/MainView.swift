@@ -11,7 +11,7 @@ struct MainView: View {
     @EnvironmentObject var store: GitHubViewModel
 
     var body: some View {
-        Text("Repository List")
+        Text("Repository List").bold()
         repositoryListView
     }
 
@@ -22,7 +22,6 @@ struct MainView: View {
                     let cur = entry
                     let last = self.store.entries.last!
                     if cur.id == last.id {
-                        print("===== get more items =====")
                         let cursor = cur.cursor
                         self.store.fetchMoreItems(cursor: cursor)
                     }

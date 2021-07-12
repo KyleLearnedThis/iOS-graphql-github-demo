@@ -13,6 +13,17 @@ struct RepostitoryEntryItemView: View {
     init(entry: RepositoryEntry) {
         self.entry = entry
     }
+
+    var starsView: some View {
+        Group {
+            Image(systemName: "star")
+                .foregroundColor(.gray)
+            Text("\(entry.stargazerCount) Stars")
+                .font(.footnote)
+                .foregroundColor(.gray)
+        }
+    }
+
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -22,17 +33,13 @@ struct RepostitoryEntryItemView: View {
                 Text("\(entry.owner)")
                     .foregroundColor(.gray)
                     .padding()
+                Spacer()
+                starsView
             }
             HStack {
                 Text("\(entry.name)")
-                    .font(.title2)
+                    .font(.title3)
                     .padding()
-                Spacer()
-                Image(systemName: "star")
-                    .foregroundColor(.gray)
-                Text("\(entry.stargazerCount) Stars")
-                    .font(.footnote)
-                    .foregroundColor(.gray)
             }
         }
     }
