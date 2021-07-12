@@ -9,4 +9,5 @@ import Foundation
 
 class Configurations {
     static let gitToken = "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"
+    static let pageSize = 10
 }

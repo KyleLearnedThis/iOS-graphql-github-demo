@@ -11,7 +11,11 @@ import SwiftUI
 struct iOS_graphql_github_demoApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            let store = GitHubViewModel()
+            MainView().environmentObject(store)
+                .onAppear{
+                    store.fetchRepoList(Configurations.pageSize)
+                }
         }
     }
 }

@@ -1,14 +1,17 @@
 query RepoList($first:Int){
   search(query: "repository:graphql", type: REPOSITORY, first: $first) {
     repositoryCount
-    nodes {
-      ... on Repository {
-        name
-        owner {
-          login
-          avatarUrl
+    edges {
+      cursor
+      node {
+        ... on Repository {
+          name
+          owner {
+            login
+            avatarUrl
+          }
+          stargazerCount
         }
-        stargazerCount
       }
     }
   }
