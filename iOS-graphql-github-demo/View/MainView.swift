@@ -17,7 +17,7 @@ struct MainView: View {
 
     var repositoryListView: some View {
         List(store.entries, id: \.self) { entry in
-            Text("\(entry.name)")
+            RepostitoryEntryItemView(entry: entry)
         }
     }
 }
